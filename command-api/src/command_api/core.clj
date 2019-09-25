@@ -5,6 +5,5 @@
 
 (defn -main []
   "Ponto de entrada da aplicação - Rode 'lein run'"
-  (let [port (Integer/parseInt (or (System/getenv "PORT_API") "80"))]
-    (println (str "Start app in port " port))
-    (run-server app {:port port})))
+    (println (str "Start app in port " 8080))
+    (run-server app {:port 8080}))
