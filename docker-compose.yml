@@ -2,6 +2,7 @@ version: '3.3'
 
 networks: 
   mensageria:
+  database:
 
 services:
   zookeeper:
@@ -24,3 +25,15 @@ services:
     image: mongo
     networks: 
       - database
+
+  command-api:
+    container_name: command-api
+    build: ./command-api
+    ports:
+      - 8080:8080
+    networks: 
+      - mensageria
+    environment: 
+      KAFKA_TOPIC: todo-topic
+      KAFKA_BROKER: kafka:9092
+      
