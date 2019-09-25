@@ -1,0 +1,26 @@
+version: '3.3'
+
+networks: 
+  mensageria:
+
+services:
+  zookeeper:
+    container_name: zookeeper
+    image: wurstmeister/zookeeper
+    networks: 
+      - mensageria
+ 
+  kafka:
+    container_name: kafka
+    image: wurstmeister/kafka
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks: 
+      - mensageria
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    networks: 
+      - database
