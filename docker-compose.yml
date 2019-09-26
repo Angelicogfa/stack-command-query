@@ -27,7 +27,7 @@ services:
       - database
 
   command-api:
-    container_name: command-api
+    container_name: producer
     build: ./command-api
     ports:
       - 8080:8080
@@ -36,4 +36,14 @@ services:
     environment: 
       KAFKA_TOPIC: todo-topic
       KAFKA_BROKER: kafka:9092
+    
+  command-processor:
+    container_name: consumer
+    build: ./command-processor
+    networks: 
+     - mensageria
+    environment: 
+      KAFKA_TOPIC: todo-topic
+      KAFKA_BROKER: kafka:9092
+      KAFKA_GROUPID: todo-group
       

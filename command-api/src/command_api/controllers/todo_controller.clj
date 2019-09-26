@@ -17,7 +17,7 @@
    (PUT "/todo/:id" [id]
      :body [model CheckTodo]
      :summary "Change the status of item"
-     (let [result (service/check-todo model)]
+     (let [result (service/check-todo {:id id :check (:check model)})]
        (if (true? result)
          (accepted)
          (bad-request))))])
