@@ -3,7 +3,7 @@ WORKDIR /src/api
 COPY . /src/api
 RUN lein uberjar
 
-FROM clojure:lein
+FROM openjdk:8-alpine
 COPY --from=base src/api/target/command-api-0.0.1-standalone.jar command-api-0.0.1-standalone.jar
 EXPOSE 8080
 ENV KAFKA_BROKER=
